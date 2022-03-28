@@ -1,0 +1,46 @@
+.main{
+    display:flex;
+    background:red;
+    width:100%;
+}
+.leftPanel{
+    width:40%;
+    background: rgb(182,243,134);
+    background: linear-gradient(167deg, rgba(182,243,134,1) 0%, rgba(136,238,97,1) 80%, rgba(207,247,255,1) 100%);
+    height: 100vh;
+    /* display: flex;
+    align-items: flex-end;
+    flex-direction: row; */
+    color:white;
+}
+.rightPanel{
+    width:60%;
+    background:white;
+    height:100vh;
+}
+.dateholder{
+    margin-top: 6rem;
+}
+.tempDetails{
+    margin-top: 20rem;
+}
+.temp{
+    font-size: 5vw;
+    margin-left:3rem;
+}
+
+.forecastHeading{
+    border-bottom: 1px solid rgb(136, 136, 136);
+    margin-top:6rem;
+}
+.rightPanelContainer{
+    width:80%;
+    margin:0 auto;
+}
+.timeframeSection{
+    margin-top: 2rem;
+}
+.weekTab{
+    overflow-y: scroll;
+    height:20rem;
+}
