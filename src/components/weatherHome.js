@@ -26,7 +26,7 @@ const WeatherHome=()=>{
 
     const loadweather=async (choice)=>{
         if(choice==="Today"){
-            const response=await fetch('http://api.openweathermap.org/data/2.5/weather?q=London&appid=048c43a2f7e00f37c3b4044df2ec3128')
+            const response=await fetch('https://api.openweathermap.org/data/2.5/weather?q=London&appid=048c43a2f7e00f37c3b4044df2ec3128')
             let data=await response.json();
             
             defaultCity=data.name;
@@ -36,13 +36,13 @@ const WeatherHome=()=>{
             return data;
         }
         else if(choice==="Week"){
-            const response=await fetch('http://api.openweathermap.org/data/2.5/forecast?q=London&appid=048c43a2f7e00f37c3b4044df2ec3128')
+            const response=await fetch('https://api.openweathermap.org/data/2.5/forecast?q=London&appid=048c43a2f7e00f37c3b4044df2ec3128')
             let data=await response.json();
             setWeather(data);
             return data;
         }
         else{
-            const response=await fetch('http://api.openweathermap.org/data/2.5/forecast/daily?q=London&units=metric&cnt=16&appid=048c43a2f7e00f37c3b4044df2ec3128')
+            const response=await fetch('https://api.openweathermap.org/data/2.5/forecast/daily?q=London&units=metric&cnt=16&appid=048c43a2f7e00f37c3b4044df2ec3128')
             let data=await response.json();
             setWeather(data);
             return data;
