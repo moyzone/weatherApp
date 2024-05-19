@@ -1,46 +1,86 @@
-.main{
-    display:flex;
-    background:red;
-    width:100%;
-}
-.leftPanel{
-    width:40%;
-    background: rgb(182,243,134);
-    background: linear-gradient(167deg, rgba(182,243,134,1) 0%, rgba(136,238,97,1) 80%, rgba(207,247,255,1) 100%);
-    height: 100vh;
-    /* display: flex;
-    align-items: flex-end;
-    flex-direction: row; */
-    color:white;
-}
-.rightPanel{
-    width:60%;
-    background:white;
-    height:100vh;
-}
-.dateholder{
-    margin-top: 6rem;
-}
-.tempDetails{
-    margin-top: 20rem;
-}
-.temp{
-    font-size: 5vw;
-    margin-left:3rem;
+.main {
+    display: flex;
+    flex-wrap: wrap; 
+    background: red;
+    width: 100%;
 }
 
-.forecastHeading{
+.leftPanel {
+    flex: 1;
+    min-width: 300px; 
+    background: linear-gradient(167deg, rgba(182, 243, 134, 1) 0%, rgba(136, 238, 97, 1) 80%, rgba(207, 247, 255, 1) 100%);
+    height: 100vh;
+    color: white;
+    padding: 20px;
+    box-sizing: border-box; 
+}
+
+.rightPanel {
+    flex: 2; 
+    min-width: 300px; 
+    background: white;
+    height: 100vh;
+    padding: 20px; 
+    box-sizing: border-box; 
+}
+
+.dateholder {
+    margin-top: 6rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.tempDetails {
+    margin-top: 20rem;
+}
+
+.temp {
+    font-size: 3rem;
+    margin-left: 3rem;
+}
+
+.forecastHeading {
     border-bottom: 1px solid rgb(136, 136, 136);
-    margin-top:6rem;
+    margin-top: 6rem;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
-.rightPanelContainer{
-    width:80%;
-    margin:0 auto;
+
+.rightPanelContainer {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
 }
-.timeframeSection{
+
+.timeframeSection {
     margin-top: 2rem;
 }
-.weekTab{
+
+.weekTab, .monthTab {
     overflow-y: scroll;
-    height:20rem;
+    height: 20rem;
+}
+
+.todayTab, .weekTab, .monthTab {
+    font-size: 1rem;
+}
+
+.listGroupItem {
+    font-size: 1rem; 
+}
+
+@media (max-width: 768px) {
+    .temp {
+        font-size: 2rem; 
+        margin-left: 0;
+    }
+    .tempDetails {
+        text-align: center;
+        margin-top: 1rem;
+    }
+    .dateholder {
+        text-align: center;
+    }
 }

@@ -26,9 +26,9 @@ const WeatherHome = () => {
         if (choice === "Today") {
             const response = await fetch('https://api.openweathermap.org/data/2.5/weather?q=London&appid=048c43a2f7e00f37c3b4044df2ec3128');
             let data = await response.json();
-            
+
             setDefaultCity(data.name);
-            setTodayTemp((data.main.temp - 273.15).toFixed(2)); // Convert to Celsius and format to 2 decimal places
+            setTodayTemp((data.main.temp - 273.15).toFixed(2)); 
 
             setWeather(data);
             return data;
@@ -45,9 +45,15 @@ const WeatherHome = () => {
         }
     };
 
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp * 1000);
+        return date.toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    };
+        
+
     return (
-        <div className='main'>
-            <div className='leftPanel'>
+        <div className="main">
+            <div className="leftPanel">
                 <div className='dateholder'>
                     {today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear()}
                 </div>
@@ -61,14 +67,11 @@ const WeatherHome = () => {
                     </div>
                 </div>
             </div>
-            <div className='rightPanel'>
+            <div className="rightPanel">
                 <div className='rightPanelContainer'>
                     <div className='forecastSection'>
                         <div className='forecastHeading'>
                             Forecast
-                        </div>
-                        <div className='forecastClouds'>
-
                         </div>
                     </div>
                     <div className='timeframeSection'>
@@ -101,11 +104,11 @@ const WeatherHome = () => {
                                                                     return (
                                                                         <ListGroup.Item
                                                                             as="li"
-                                                                            className="d-flex justify-content-between align-items-start"
+                                                                            className="d-flex justify-content-between align-items-start listGroupItem"
                                                                             key={weatherItem.dt_txt}
                                                                         >
                                                                             <div className="ms-2 me-auto">
-                                                                                <div className="fw-bold">{"Date: " + weatherItem.dt_txt}</div>
+                                                                                <div className="fw-bold">{"Date: " + formatDate(weatherItem.dt)}</div>
                                                                                 {"Expected Weather: " + weatherItem.weather[0].main}
                                                                             </div>
                                                                             <Badge bg="primary" pill>
@@ -121,41 +124,41 @@ const WeatherHome = () => {
                                         : <>Loading..</>
                                 }
                             </Tab>
-                            <Tab eventKey="Month" title="16 Days" >
+                            <Tab eventKey="Month" title="16 Days">
                                 <div className="monthTab">
-                                    {
-                                        weather ?
-                                            weather.list ?
-                                                weather.list[0].dt_txt ? <>Loading..</> :
-                                                    (
-                                                        <div className="weekTab">
-                                                            <ListGroup as="ol">
-                                                                {
-                                                                    weather.list.map((weatherItem) => {
-                                                                        return (
-                                                                            <ListGroup.Item
-                                                                                as="li"
-                                                                                className="d-flex justify-content-between align-items-start"
-                                                                                key={weatherItem.dt}
-                                                                            >
-                                                                                <div className="ms-2 me-auto">
-                                                                                    <div className="fw-bold">{"Date: " + weatherItem.dt}</div>
-                                                                                    {"Expected Weather: " + weatherItem.weather[0].main}
-                                                                                </div>
-                                                                                <Badge bg="primary" pill>
-                                                                                    {(weatherItem.temp.min - 273.15).toFixed(2) + " °C"}
-                                                                                </Badge>
-                                                                            </ListGroup.Item>
-                                                                        )
-                                                                    })
-                                                                }
-                                                            </ListGroup>
-                                                        </div>
-                                                    ) : <>Loading..</>
-                                            : <>Loading..</>
+                                    {weather &&
+                                        weather.list &&
+                                        weather.list[0] &&
+                                        weather.list[0].dt ? (
+                                        <div className="weekTab">
+                                            <ListGroup as="ol">
+                                                {weather.list.map((weatherItem) => {
+                                                    const minTemp = weatherItem.temp && weatherItem.temp.min ? (weatherItem.temp.min - 273.15).toFixed(2) + " °C" : "N/A";
+                                                    return (
+                                                        <ListGroup.Item
+                                                            as="li"
+                                                            className="d-flex justify-content-between align-items-start listGroupItem"
+                                                            key={weatherItem.dt}
+                                                        >
+                                                            <div className="ms-2 me-auto">
+                                                                <div className="fw-bold">{"Date: " + formatDate(weatherItem.dt)}</div>
+                                                                {"Expected Weather: " + weatherItem.weather[0].main}
+                                                            </div>
+                                                            <Badge bg="primary" pill>
+                                                                {minTemp}
+                                                            </Badge>
+                                                        </ListGroup.Item>
+                                                    )
+                                                })}
+                                            </ListGroup>
+                                        </div>
+                                    ) : (
+                                        <div>Loading...</div>
+                                    )
                                     }
                                 </div>
                             </Tab>
+
                         </Tabs>
                     </div>
                 </div>
